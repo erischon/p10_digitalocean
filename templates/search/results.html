@@ -1,0 +1,76 @@
+{% extends 'webapp/base.html' %} {% load static %} {% block content %}
+
+{% if product == "None" %}
+
+<div class="container pt-5 mt5"></div>
+
+{% else %}
+
+<div class="container-fluid bg-product p-5 mt-5 text-center text-white">
+    <!-- <div class="row"><div class="col pt-4"></div></div> -->
+
+    <div class="row align-items-center justify-content-center">
+      <div class="col-lg-4">
+        <h1 class="display-4 font-weight-bold mb-4"><a href="{% url 'prodinfos' product.prod_id %}" class="text-white">{{ product.prod_name }}</a></h1>
+      </div>
+      <div class="col-lg-2">
+        <img class="img-fuild img-product-top border border-dark rounded" src="{{ product.prod_image }}" alt="">
+      </div>
+    </div>
+</div>
+
+{% endif %}
+
+
+<div class="container pt-5">
+
+    {% if product == "None" %}
+
+        <h2 class="my-md-4 py-md-4 text-left">Désolé, nous n'avons pas ce produit dans notre base de données.</h2>
+
+    {% else %}
+
+        <h2 class="text-center mb-5">Vous pouvez remplacer cet aliment par :</h2>
+
+            <div class="container mt-5">
+
+                <div class="row">
+                    {% for result in results %}
+
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="card h-100">
+                            <a href="{% url 'prodinfos' result.prod_id %}">
+                                <img class="card-img-top img-product" src="{{ result.prod_image }}" alt="{{ result.prod_name }}">
+                            </a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                <a href="{% url 'prodinfos' result.prod_id %}">{{ result.prod_name }}</a>
+                                </h4>
+                                <p>{{ result.categories }}</p>
+                                {% if user.is_authenticated %}
+
+                                    <form action="{% url 'saving' result.prod_id %}" method="post">
+                                        {% csrf_token %}
+                                        <i class="fas fa-save" style="color: #8c6610;"></i>
+                                        <input type="submit" value="Sauvegarder" class="btn btn-link btn-sm">
+                                    </form>
+        
+                                {% endif %}
+                            </div>
+                            <div class="card-badge">{{ result.nutriscore }}</div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+
+    {% endif %}
+
+
+</div>
+{% endblock %}
+

@@ -1,0 +1,64 @@
+
+body { 
+    padding-top: 0em;
+}
+
+.bg-product {
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    background: rgb(244,98,58);
+    background: linear-gradient(to bottom, rgba(182, 110, 6, 0.7) 0%, rgba(182, 110, 6, 0.7) 100%);
+}
+
+.img-product {
+    height: 20vh;
+    width: 100%;
+    object-fit: cover;
+    filter: contrast(20%);
+    filter: saturate(2);
+}
+
+.img-product-top {
+    height: 30vh;
+    width: 100%;
+    object-fit: cover;
+    filter: contrast(20%);
+    filter: saturate(2);
+}
+
+.card {
+    position: relative;
+}
+
+.card .card-badge {
+    position:absolute;
+    top:0;
+    right:0;
+    padding:5px;
+    background: #F4623A;
+    color:white;
+    padding: 1em;
+    /* transform:rotate(-20deg); */
+  }
+
+  .text-small {
+    font-size: 0.9rem;
+  }
+
+  .btn-out {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .btn-out :hover {
+    color: #fff
+  }
+
+  .bg-user {
+    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.7) 0%, rgba(92, 77, 66, 0.7) 100%);
+    /* background: linear-gradient(to bottom, rgba(92, 77, 66, 0.7) 0%, rgba(92, 77, 66, 0.7) 100%), url("../assets/img/bg-purebeurre.jpg"); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 25% 25%;
+    /* opacity: 0.5; */
+  }

@@ -1,0 +1,33 @@
+{% extends 'webapp/base.html' %} {% load static %} {% block content %}
+
+<div class="container-fluid bg-product p-5 mt-5 text-center text-white">
+    <div class="row"><div class="col pt-4"></div></div>
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-4">
+        <h1 class="display-4 font-weight-bold mb-4">{{ product.prod_name }}</h1>
+      </div>
+      <div class="col-md-2">
+        <img class="img-fuild img-product-top border border-dark rounded" src="{{ product.prod_image }}" alt="">
+      </div>
+    </div>
+</div>
+
+<!-- <div class="container pt-5"> -->
+
+    
+    <div class="container py-4 my-4">
+        <div class="row justify-content-center">
+            <h2>Nutriscore : <strong>{{ product.nut_id.nut_type }}</strong></h2>
+        </div>
+    </div>
+      
+
+    <div class="container">
+        <div class="row justify-content-center py-4 my-4">
+            <a href="{{ product.prod_url }}" target="_blank" class="h3">Voir la fiche d'Open Food Facts</a>
+        </div>
+    </div>
+
+<!-- </div> -->
+{% endblock %}
+

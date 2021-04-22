@@ -1,0 +1,51 @@
+{% extends 'webapp/base.html' %} {% load static %} {% block content %}
+
+<div class="container-fluid bg-user p-5 mt-5 text-center text-white">
+    <div class="row"><div class="col pt-4"></div></div>
+    <div class="row align-items-center justify-content-center">
+      <div class="col-md-6">
+        <h1 class="display-4 font-weight-bold mb-4">Admin de la Base</h1> 
+      </div>
+    </div>
+</div>
+
+<div class="container pt-5 text-center">
+
+<h2>Extraction</h2>
+<p><a href="{% url 'etl_extract' %} ">Lancer l'extraction</a></p>
+
+<p>
+{{ message_extract }}
+</p>
+
+<h2>Transform</h2>
+<p><a href="{% url 'etl_transform' %} ">Lancer le Transform</a></p>
+
+<p>
+{{ message_transform }}
+</p>
+
+<h2>Loading</h2>
+<p><a href="{% url 'etl_load' %} ">Lancer le loading</a></p>
+
+<p>
+{{ message_load }}
+</p>
+
+
+<h2>Utils</h2>
+<p><a href="{% url 'etl_manage_delete' %} ">Delete</a></p>
+
+<p>
+{{ message_manage_delete }}
+</p>
+
+<p><a href="{% url 'etl_manage_nutriscore' %} ">Créer les Nutriscores</a></p>
+
+<p>
+{{ message_manage_nutriscore }}
+</p>
+
+</div>
+
+{% endblock %}
