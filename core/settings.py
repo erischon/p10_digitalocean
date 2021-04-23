@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import os
+import environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -100,9 +101,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+env = environ.Env()
+environ.Env.read_env()
+
 SECRET_KEY = os.environ.get("SECRET_KEY", "toto")
 DEBUG = int(os.environ.get("DEBUG", default=0))
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ['46.101.141.242', '0.0.0.0', 'localhost', '127.0.0.1', '[::1]']
 
 DATABASES = {
     "default": {
