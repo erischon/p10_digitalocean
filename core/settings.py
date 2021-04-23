@@ -103,7 +103,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "toto")
 DEBUG = int(os.environ.get("DEBUG", default=0))
-ALLOWED_HOSTS = ['46.101.141.242', 0.0.0.0, '.localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['46.101.141.242', '0.0.0.0', '.localhost', '127.0.0.1', '[::1]']
 
 DATABASES = {
     'default': {
