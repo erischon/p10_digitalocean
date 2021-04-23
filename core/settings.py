@@ -103,15 +103,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "toto")
 DEBUG = int(os.environ.get("DEBUG", default=0))
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['46.101.141.242', '.localhost', '127.0.0.1', '[::1]']
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'purbeurre', 
-        'USER': 'postgres', 
-        'PASSWORD': 'erischon2021',
+        'NAME': 'thesubstitute', 
+        'USER': 'erischon', 
+        'PASSWORD': 'Thes2021=',
         'HOST': 'localhost', 
-        'PORT': '5432',
+        'PORT': '',
     }
 }
