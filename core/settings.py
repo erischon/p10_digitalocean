@@ -102,14 +102,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = int(os.environ.get("DEBUG", default=0))
-ALLOWED_HOSTS = ['46.101.141.242', '0.0.0.0', 'localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['46.101.141.242', '0.0.0.0', 'localhost']
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": os.environ.get("SQL_ENGINE"),
+#         "NAME": os.environ.get("SQL_DATABASE"),
+#         "USER": os.environ.get("SQL_USER"),
+#         "PASSWORD": os.environ.get("SQL_PASSWORD"),
+#         "HOST": os.environ.get("SQL_HOST"),
+#     }
+# }
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE"),
-        "NAME": os.environ.get("SQL_DATABASE"),
-        "USER": os.environ.get("SQL_USER"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD"),
-        "HOST": os.environ.get("SQL_HOST"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'thesubstitute', 
+        'USER': 'erischon', 
+        'PASSWORD': 'Thes2021=',
+        'HOST': 'localhost', 
+        'PORT': '',
     }
 }
