@@ -94,7 +94,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),) # for development
 STATIC_ROOT = os.path.join(BASE_DIR, "static/") # for production
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
@@ -103,15 +102,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "toto")
 DEBUG = int(os.environ.get("DEBUG", default=0))
-ALLOWED_HOSTS = ['46.101.141.242', '0.0.0.0', 'localhost', '127.0.0.1', '[::1]']
+# ALLOWED_HOSTS = ['46.101.141.242', '0.0.0.0', 'localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'thesubstitute', 
+#         'USER': 'erischon', 
+#         'PASSWORD': 'Thes2021=',
+#         'HOST': 'localhost', 
+#         'PORT': '',
+#     }
+# }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'thesubstitute', 
-        'USER': 'erischon', 
-        'PASSWORD': 'Thes2021=',
-        'HOST': 'localhost', 
-        'PORT': '',
+    "default": {
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
