@@ -101,7 +101,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "toto")
+SECRET_KEY = os.environ.get("SECRET_KEY", "modify")
 DEBUG = int(os.environ.get("DEBUG", default=0))
 ALLOWED_HOSTS = ['46.101.141.242', '0.0.0.0', 'localhost', '127.0.0.1', '[::1]']
 
@@ -110,7 +110,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'thesubstitute', 
         'USER': 'erischon', 
-        'PASSWORD': 'Thes2021=',
+        'PASSWORD': 'modify',
         'HOST': 'localhost', 
         'PORT': '',
     }
