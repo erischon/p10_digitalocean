@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth.models import User
 
 
@@ -12,3 +12,9 @@ class SignUpForm(UserCreationForm):
         help_texts = {
             'username': '(Required)',
         }
+
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = UsernameField(
+        label='Email',
+    )

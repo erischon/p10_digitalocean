@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 
 from database.models import Product
-from users.forms import SignUpForm
+from users.forms import SignUpForm, CustomAuthenticationForm
 
 
 def signupuser(request):
@@ -33,12 +33,12 @@ def loginuser(request):
         user = authenticate(
             request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
-            return render(request, 'users/login.html', {'form': AuthenticationForm(), 'error': "Username and password did not match."})
+            return render(request, 'users/login.html', {'form': CustomAuthenticationForm(), 'error': "Username and password did not match."})
         else:
             login(request, user)
             return redirect('moncompte')
     else:
-        return render(request, 'users/login.html', {'form': AuthenticationForm()})
+        return render(request, 'users/login.html', {'form': CustomAuthenticationForm()})
 
 
 @login_required
