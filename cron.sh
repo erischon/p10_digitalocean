@@ -8,5 +8,3 @@ export DB_PASSWORD="Thes2021="
 
 cd /home/erischon/p10_digitalocean/
 /home/erischon/p10_digitalocean/venv/bin/python3 /home/erischon/p10_digitalocean/manage.py etl
-
-echo "Hello World!" > /home/erischon/test.log
