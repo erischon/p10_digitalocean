@@ -130,3 +130,5 @@ dmypy.json
 
 # Settings
 production.py
+
+.coveragerc

@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 
+
 from database.models import Product, Nutriscore
 
 
@@ -20,7 +21,7 @@ class UsersTestViews(TestCase):
         self.user = get_user_model().objects.create_user(
             email='test@test.com',
             password='test123',
-            username='user'
+            username='testuser'
         )
 
         self.factory = RequestFactory()
@@ -39,6 +40,7 @@ class UsersTestViews(TestCase):
         self.myproducts_url = reverse('myproducts')
         self.myproducts_delete_url = reverse(
             'myproducts_delete', args=[self.product.prod_id])
+        self.password_reset_url = reverse('password_reset')
 
     # === Method signupuser ===
 
@@ -55,11 +57,27 @@ class UsersTestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/signup.html')
 
+    def test_signupuser_view_post_method_except(self):
+        self.client.logout()
+        response = self.client.post('/users/signup/', {'password1': 'pass1', 'password2': 'pass1', 'username': 'testuser', 'email': 'testemail'})
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'users/signup.html')
+
     def test_signupuser_view_post_method_with_connect(self):
+        self.client.logout()
         response = self.client.post(
-            '/users/signup/', {'password1': 'pass1', 'password2': 'pass1', 'username': 'testuser2', 'email': 'testemail'})
+            '/users/signup/', 
+            {
+                'password1': 'pass1', 
+                'password2': 'pass1', 
+                'username': 'testuser2', 
+                'email': 'testemail@test.com'
+            }
+        )
 
         self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, '/users/moncompte/')
 
     # === Method loginuser ===
 
@@ -107,3 +125,17 @@ class UsersTestViews(TestCase):
         response = self.client.get(self.myproducts_delete_url)
 
         self.assertEquals(response.status_code, 302)
+
+    # Testing Password Reset Part
+    def test_password_reset_view(self):
+        response = self.client.get(self.password_reset_url)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'users/password/password_reset.html')
+
+    def test_password_reset_view_is_done(self):
+        response = self.client.post('users/password_reset/', )
+        print(response)
+
+        self.assertEquals(response.status_code, 302)
+        self.assertTemplateUsed(response, 'users/password/password_reset_done')
