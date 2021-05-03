@@ -1,7 +1,7 @@
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 
 from database.models import Product, Nutriscore
@@ -18,6 +18,7 @@ class UsersTestViews(TestCase):
             password='test123'
         )
         self.client.force_login(self.admin_user)
+
         self.user = get_user_model().objects.create_user(
             email='test@test.com',
             password='test123',
@@ -67,11 +68,11 @@ class UsersTestViews(TestCase):
     def test_signupuser_view_post_method_with_connect(self):
         self.client.logout()
         response = self.client.post(
-            '/users/signup/', 
+            '/users/signup/',
             {
-                'password1': 'pass1', 
-                'password2': 'pass1', 
-                'username': 'testuser2', 
+                'password1': 'pass1',
+                'password2': 'pass1',
+                'username': 'testuser2',
                 'email': 'testemail@test.com'
             }
         )
@@ -82,14 +83,12 @@ class UsersTestViews(TestCase):
     # === Method loginuser ===
 
     def test_loginuser_view(self):
-        response = self.client.post(
-            '/users/login/', 
-            {'username': 'test@test.com', 'password': 'test123'}, 
-            follow=True
-            )
+        payload = {'username': 'testuser', 'password': 'test123'}
+        response = self.client.post('/users/login/', payload, follow=True)
 
         self.assertTrue(response.context['user'].is_active)
         self.assertEquals(response.status_code, 200)
+        self.assertRedirects(response, '/users/moncompte/')
 
     def test_loginuser_view_user_is_none(self):
         response = self.client.post(
@@ -133,9 +132,12 @@ class UsersTestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/password/password_reset.html')
 
-    # def test_password_reset_view_is_done(self):
-    #     response = self.client.post('users/password_reset/', )
-    #     print(response)
+    def test_password_reset_view_is_done(self):
+        payload = {'email': 'test@test.com'}
+        response = self.client.post(self.password_reset_url, payload)
 
-    #     self.assertEquals(response.status_code, 302)
-    #     self.assertTemplateUsed(response, 'users/password/password_reset_done')
+        self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, reverse('password_reset_done'))
+
+    def test_password_reset_view_BadHeaderError(self):
+        pass
