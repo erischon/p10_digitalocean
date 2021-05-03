@@ -14,7 +14,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 
 from database.models import Product
-from users.forms import SignUpForm, CustomAuthenticationForm
+from users.forms import SignUpForm
 
 
 def signupuser(request):
@@ -28,7 +28,7 @@ def signupuser(request):
                 login(request, user)
                 return redirect('moncompte')
             except IntegrityError:
-                return render(request, 'users/signup.html', {'form': SignUpForm(), 'error': 'Cet email est déjà pris. Merci d\'en choisir un nouveau.'})
+                return render(request, 'users/signup.html', {'form': SignUpForm(), 'error': 'Ce nom est déjà pris. Merci d\'en choisir un nouveau.'})
         else:
             return render(request, 'users/signup.html', {'form': SignUpForm(), 'error': 'Les mots de passe ne sont pas identiques.'})
     else:
@@ -41,12 +41,12 @@ def loginuser(request):
         user = authenticate(
             request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
-            return render(request, 'users/login.html', {'form': CustomAuthenticationForm(), 'error': "Username and password did not match."})
+            return render(request, 'users/login.html', {'form': AuthenticationForm(), 'error': "Username and password did not match."})
         else:
             login(request, user)
             return redirect('moncompte')
     else:
-        return render(request, 'users/login.html', {'form': CustomAuthenticationForm()})
+        return render(request, 'users/login.html', {'form': AuthenticationForm()})
 
 
 @login_required
