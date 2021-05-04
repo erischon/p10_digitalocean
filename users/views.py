@@ -14,7 +14,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 # from django.contrib import messages
 
-from database.models import Product, Substitute
+from database.models import Substitute
 from users.forms import SignUpForm
 
 
