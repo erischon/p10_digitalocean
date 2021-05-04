@@ -1,0 +1,18 @@
+[run]
+omit=
+    */migrations/*
+    */__init__.py
+    manage.py
+    */tests/*
+    */core/*
+    */_tests.py
+    */apps.py
+
+    */extract.py
+    */transform.py
+    */load.py
+    */utils.py
+    */etl.py
+
+    *.venv/*
+

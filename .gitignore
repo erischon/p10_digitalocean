@@ -129,7 +129,5 @@ dmypy.json
 .pyre/
 
 # Settings
-production.py
-local.py
 
-.coveragerc
+static/database/
