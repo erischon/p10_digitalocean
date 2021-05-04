@@ -4,6 +4,7 @@ exclude =
     __pycache__,
     manage.py,
     */settings/*,
+    *.venv/*
 
 ignore =
     E501,
