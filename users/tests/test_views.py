@@ -45,6 +45,11 @@ class UsersTestViews(TestCase):
             original_product=self.product_c,
             user=self.user,
         )
+        self.substitute_b = Substitute.objects.create(
+            substitute_product=self.product_a,
+            original_product=self.product_c,
+            user=self.admin_user,
+        )
 
         self.signupuser_url = reverse('signupuser')
         self.logoutuser_url = reverse('logoutuser')
@@ -133,8 +138,11 @@ class UsersTestViews(TestCase):
 
     def test_myproducts_delete_view(self):
         response = self.client.get(self.myproducts_delete_url)
+        is_deleted = Substitute.objects.filter(substitute_product=self.product_a)  # List of product_a in Substitute table
 
         self.assertEquals(response.status_code, 302)
+        self.assertRedirects(response, '/users/myproducts/')
+        self.assertQuerysetEqual(is_deleted, ['<Substitute: test product>'])  # There must be a value
 
     # === Testing Password Reset Part ===
     def test_password_reset_view(self):
