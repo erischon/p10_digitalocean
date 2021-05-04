@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 # from django.contrib.auth.models import User
 
 
-from database.models import Product, Nutriscore
+from database.models import Product, Nutriscore, Substitute
 
 
 class UsersTestViews(TestCase):
@@ -27,20 +27,31 @@ class UsersTestViews(TestCase):
 
         self.factory = RequestFactory()
 
-        nutriscore = Nutriscore.objects.create(nut_id=1, nut_type="C")
-        self.product = Product.objects.create(
+        nutriscore_c = Nutriscore.objects.create(nut_id=1, nut_type="C")
+        nutriscore_a = Nutriscore.objects.create(nut_id=2, nut_type="A")
+
+        self.product_c = Product.objects.create(
             prod_id=3017620422003,
             prod_name="test product",
-            nut_id=nutriscore,
+            nut_id=nutriscore_c,
         )
-        self.product.myproduct.add(self.user)
+        self.product_a = Product.objects.create(
+            prod_id=3017620422010,
+            prod_name="test product",
+            nut_id=nutriscore_a,
+        )
+        self.substitute = Substitute.objects.create(
+            substitute_product=self.product_a,
+            original_product=self.product_c,
+            user=self.user,
+        )
 
         self.signupuser_url = reverse('signupuser')
         self.logoutuser_url = reverse('logoutuser')
         self.moncompte_url = reverse('moncompte')
         self.myproducts_url = reverse('myproducts')
         self.myproducts_delete_url = reverse(
-            'myproducts_delete', args=[self.product.prod_id])
+            'myproducts_delete', args=[self.substitute.id])
         self.password_reset_url = reverse('password_reset')
 
     # === Method signupuser ===
@@ -125,7 +136,7 @@ class UsersTestViews(TestCase):
 
         self.assertEquals(response.status_code, 302)
 
-    # Testing Password Reset Part
+    # === Testing Password Reset Part ===
     def test_password_reset_view(self):
         response = self.client.get(self.password_reset_url)
 

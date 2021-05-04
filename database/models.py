@@ -28,10 +28,18 @@ class Product(models.Model):
     prod_url = models.CharField(max_length=250)
     prod_image = models.CharField(max_length=250, null=True)
     nut_id = models.ForeignKey(Nutriscore, on_delete=models.CASCADE)
-    myproduct = models.ManyToManyField(User)
 
     def __str__(self):
         return self.prod_name
+
+
+class Substitute(models.Model):
+    substitute_product = models.ForeignKey(Product, related_name='subproduct', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    original_product = models.ForeignKey(Product, related_name='oriproduct', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.substitute_product.prod_name
 
 
 class Prodcat(models.Model):

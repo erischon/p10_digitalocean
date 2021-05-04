@@ -19,5 +19,5 @@ class SearchTestUrls(SimpleTestCase):
         self.assertEqual(resolve(url).func, prodinfos)
 
     def test_saving_url_is_resolved(self):
-        url = reverse('saving', args=['1'])
+        url = reverse('saving', args=['1', '1'])
         self.assertEqual(resolve(url).func, saving)

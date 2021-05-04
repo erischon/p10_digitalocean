@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from database.models import Product
+from database.models import Product, Substitute
 from search.search import Search
 from search.forms import RequestForm
 
@@ -46,8 +46,9 @@ def prodinfos(request, prod_id):
         return redirect('home', {'error': error})
 
 
-def saving(request, product):
+def saving(request, subproduct, oriproduct):
     ''' I'm saving a Product in the User's Myproduct model. '''
-    product = Product.objects.get(prod_id=product)
-    product.myproduct.add(request.user)
+    sub_product = Product.objects.get(prod_id=subproduct)
+    ori_product = Product.objects.get(prod_id=oriproduct)
+    Substitute.objects.create(substitute_product=sub_product, original_product=ori_product, user=request.user)
     return redirect('myproducts')
