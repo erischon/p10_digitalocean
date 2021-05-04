@@ -14,7 +14,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 # from django.contrib import messages
 
-from database.models import Product
+from database.models import Product, Substitute
 from users.forms import SignUpForm
 
 
@@ -67,15 +67,15 @@ def moncompte(request):
 @login_required
 def myproducts(request):
     ''' '''
-    myproducts = Product.objects.filter(myproduct=request.user)
+    myproducts = Substitute.objects.filter(user=request.user)
     return render(request, 'users/myproducts.html', {'myproducts': myproducts})
 
 
 @login_required
 def myproducts_delete(request, product):
     ''' '''
-    myproduct = Product.objects.get(prod_id=product)
-    myproduct.myproduct.clear()
+    myproduct = Substitute.objects.get(id=product)
+    myproduct.delete()
     return redirect('myproducts')
 
 
