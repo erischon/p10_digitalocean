@@ -17,6 +17,8 @@ from django.utils.encoding import force_bytes
 from database.models import Substitute
 from users.forms import SignUpForm
 
+import os
+
 
 def signupuser(request):
     ''' '''
@@ -93,7 +95,7 @@ def password_reset_request(request):
                     email_template_name = "users/password/password_reset_email.txt"
                     c = {
                         "email": user.email,
-                        'domain': '46.101.141.242',
+                        'domain': os.getenv('DOMAIN'),
                         'site_name': 'The Substitute',
                         "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                         "user": user,
