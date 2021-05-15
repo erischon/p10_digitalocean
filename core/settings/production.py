@@ -7,7 +7,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = False
-ALLOWED_HOSTS = ['46.101.141.242', '0.0.0.0', 'localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['46.101.141.242', 'localhost']
 
 DATABASES = {
     'default': {

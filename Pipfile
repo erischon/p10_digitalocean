@@ -11,6 +11,7 @@ sentry-sdk = "==1.0.0"
 Django = "==3.2"
 coverage = "*"
 flake8 = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
