@@ -1,4 +1,3 @@
-import os
 from . import *
 
 import sentry_sdk
@@ -23,7 +22,7 @@ DATABASES = {
 
 
 sentry_sdk.init(
-    dsn=os.getenv(SENTRY_DSN),
+    dsn=os.getenv('SENTRY_DSN'),
     integrations=[DjangoIntegration()],
 
     # Set traces_sample_rate to 1.0 to capture 100%
