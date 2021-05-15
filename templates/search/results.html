@@ -49,7 +49,7 @@
                                 <p>{{ result.categories }}</p>
                                 {% if user.is_authenticated %}
 
-                                    <form action="{% url 'saving' result.prod_id %}" method="post">
+                                    <form action="{% url 'saving' result.prod_id product.prod_id %}" method="post">
                                         {% csrf_token %}
                                         <i class="fas fa-save" style="color: #8c6610;"></i>
                                         <input type="submit" value="Sauvegarder" class="btn btn-link btn-sm">

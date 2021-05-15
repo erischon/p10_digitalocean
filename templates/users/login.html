@@ -19,7 +19,10 @@
             <form method="POST" action="">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-warning">Login</button>
+                
+                <h6 class="my-1"><a href="{% url 'password_reset' %}">Password oublié ?</a></h6>
+                
+                <button type="submit" class="btn btn-warning my-4">Login</button>
             </form>
 
         </div>

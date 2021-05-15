@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 # Settings
-production.py
+
+static/database/

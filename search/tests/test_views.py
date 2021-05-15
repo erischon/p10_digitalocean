@@ -13,8 +13,14 @@ class SearchTestViews(TestCase):
         self.factory = RequestFactory()
 
         nutriscore = Nutriscore.objects.create(nut_id=1, nut_type="C")
-        self.product = Product.objects.create(
+
+        self.product_a = Product.objects.create(
             prod_id=3017620422003,
+            prod_name="test product",
+            nut_id=nutriscore,
+        )
+        self.product_b = Product.objects.create(
+            prod_id=3017620422010,
             prod_name="test product",
             nut_id=nutriscore,
         )
@@ -24,9 +30,9 @@ class SearchTestViews(TestCase):
         )
 
         self.search_result_url = reverse('search_results')
-        self.prodinfos_url = reverse('prodinfos', args=[self.product.prod_id])
+        self.prodinfos_url = reverse('prodinfos', args=[self.product_a.prod_id])
         self.search_sub_url = reverse('search_sub')
-        self.saving_url = reverse('saving', args=[self.product.prod_id])
+        self.saving_url = reverse('saving', args=[self.product_a.prod_id, self.product_a.prod_id])
 
     def test_search_results(self):
         response = self.client.get(self.search_result_url, {'user_request': "Test product"})
@@ -55,6 +61,6 @@ class SearchTestViews(TestCase):
         request = self.factory.get('/search/result/')
         request.user = self.user
 
-        response = saving(request, self.product.prod_id)
+        response = saving(request, self.product_a.prod_id, self.product_b.prod_id)
 
         self.assertEquals(response.status_code, 302)

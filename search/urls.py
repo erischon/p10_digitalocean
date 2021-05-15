@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.search_sub, name='search_sub'),
     path('result/', views.search_results, name='search_results'),
     path('prodinfos/<int:prod_id>', views.prodinfos, name="prodinfos"),
-    path('saving/<int:product>', views.saving, name='saving'),
+    path('saving/<int:subproduct>/<int:oriproduct>', views.saving, name='saving'),
 ]
