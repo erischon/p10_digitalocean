@@ -13,8 +13,3 @@ urlpatterns = [
 handler400 = 'webapp.views.error_404'
 handler403 = 'webapp.views.error_404'
 handler404 = 'webapp.views.error_404'
-
-def handler500(request, *args, **argv):
-    response = render_to_response('webapp/500.html', {}, context_instance=RequestContext(request))
-    response.status_code = 500
-    return response
