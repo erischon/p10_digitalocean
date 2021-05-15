@@ -18,7 +18,7 @@ INSTALLED_APPS = [
     # My Apps
     'webapp',
     'users',
-    'database',
+    'database.apps.EtlConfig',
     'search',
 ]
 
